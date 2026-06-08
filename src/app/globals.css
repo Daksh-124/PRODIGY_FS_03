@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0c0c0c;
+  --color-foreground: #F0EFE7;
+  --color-charcoal: #333333;
+  --color-charcoal-light: #444444;
+  --color-offwhite: #F0EFE7;
+  --color-beige: #B8A98F;
+  --color-brown: #8B7355;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-gothic: 'Cinzel', serif;
+}
+
+:root {
+  --background: #0c0c0c;
+  --foreground: #F0EFE7;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  /* cursor: none; */ /* Disabled to restore default cursor along with CustomCursor */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0c0c;
+}
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B8A98F;
+}
+
+/* Vintage Grain Overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Glassmorphism Class */
+.glassmorphism {
+  background: rgba(19, 19, 19, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(240, 239, 231, 0.08);
+}
+
+.glassmorphism-light {
+  background: rgba(240, 239, 231, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(240, 239, 231, 0.05);
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 12px;
+  height: 12px;
+  background-color: #F0EFE7;
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10000;
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+.custom-cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(184, 169, 143, 0.4);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.3s, height 0.3s, border-color 0.3s, transform 0.1s ease-out;
+}
+
+/* Page Loader Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Gothic Font Utility */
+.font-gothic {
+  font-family: 'Cinzel', serif;
+}
+
+/* Print Invoice Styles */
+@media print {
+  body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-family: 'Inter', sans-serif !important;
+    cursor: auto !important;
+    overflow: visible !important;
+  }
+  
+  .custom-cursor,
+  .custom-cursor-ring,
+  .no-print,
+  header,
+  nav,
+  footer,
+  aside,
+  button,
+  .grain-overlay,
+  .toast-container {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+    width: 100% !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  @page {
+    margin: 1.5cm;
+  }
+}
+
+@media screen {
+  .print-only {
+    display: none !important;
+  }
+}
